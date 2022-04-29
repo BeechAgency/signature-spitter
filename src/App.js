@@ -82,7 +82,7 @@ function App() {
         break;
     }
 
-  }, [activeSig, name, title, mobile, img, lineColor, logo, fullURL, website, linkedIn, officePhone, email,]);
+  }, [activeSig, name, title, mobile, img, lineColor, logo, fullURL, website, linkedIn, officePhone, email, address]);
 
 
 

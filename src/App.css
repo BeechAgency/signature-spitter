@@ -163,6 +163,7 @@ img.logo {
     box-shadow: var(--shadow);
     border-radius: var(--radius);
     width: 100%;
+    max-width: 520px;
 }
 
 .sig-container {
@@ -278,4 +279,34 @@ button:active {
 .inputGroup.sigSelector select {
     background-color: transparent;
     color: var(--white);
+}
+.html {
+    max-height: 0;
+    overflow:hidden;
+    transition: all 150ms ease;
+}
+.html.visible {
+    max-height: 300px;
+}
+pre {
+    background-color: #212121;
+    color: white;
+    padding: var(--box-padding);
+    white-space: pre-wrap;
+    font-size: 0.5rem;
+    max-height: 300px;
+    overflow: scroll;
+}
+.dual-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.show-advanced {
+    max-height: 500px;
+    transition: all 300ms ease;
+    overflow: hidden;
+}
+.show-advanced.hidden {
+    max-height: 0px;
 }

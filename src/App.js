@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+
+import ReactDOMServer from 'react-dom/server';
+
 import OldSigTemplate from './sigs/rumpus';
 import SigTemplateSmall from './sigs/LittleSig';
 import AASignature from './sigs/aa';
@@ -12,7 +15,7 @@ function App() {
   const [title, setTitle] = useState('Digital Marketing Dude of Sorts');
   const [mobile, setMobile] = useState('0405 000 000');
   const [email, setEmail] = useState('getded@extrazero.xyz');
-  const [img, setImg] = useState('https://res.cloudinary.com/mon9466/image/upload/v1598508188/beech/email-sig/josh-w_kfetgz.jpg')
+  const [img, setImg] = useState('https://placebear.com/153/243');
   const [lineColor, setLineColor] = useState('#fcb415');
 
   const [website, setWebsite] = useState('extrazero.xyz');
@@ -20,9 +23,11 @@ function App() {
   const [officePhone, setOfficePhone] = useState('02 4940 8686');
   const [address, setAddress] = useState('123 Fake St, North Sydney');
 
-  const [displayMoreVisibility, setDisplayMoreVisibility] = useState('none');
-  const [displayMoreText, setDisplayMoreText] = useState('Show more');
+  const [linkedIn, setLinkedIn] = useState('https://extrazero.xyz');
+
+  const [displayMoreVisibile, setDisplayMoreVisibile] = useState(false);
   const [sigOutput, setSigOutput] = useState(<OldSigTemplate name={name} title={title} mobile={mobile} email={email} img={img} lineColor={lineColor} href={fullURL} displayUrl={website} />);
+  const [codeVisible, setCodeVisible] = useState(false);
 
   const logo = 'https://www.therumpusroom.com.au/wp-content/themes/rumpus/assets/img/logo.svg';
 
@@ -32,23 +37,11 @@ function App() {
     { name: 'Alexander Appointments', value : 'aa' },
   ]
 
-  function displayToggle(e) {
-    e.preventDefault();
-
-    if(displayMoreVisibility === 'none') {
-      setDisplayMoreVisibility('block');
-      setDisplayMoreText('Hide');
-    } else {
-      setDisplayMoreVisibility('none');
-      setDisplayMoreText('Show more');
-    }
-  }
-
   function copySignature() {
-    const cb = navigator.clipboard;
+    //const cb = navigator.clipboard;
     const sig = document.querySelector('.sig-container');
 
-    const { ClipboardItem } = window;
+    // const { ClipboardItem } = window;
 
     // create a Range object
     let range = document.createRange();  
@@ -73,7 +66,7 @@ function App() {
 
     switch(activeSig) {
       case 'aa':
-        setSigOutput(<AASignature name={name} title={title} mobile={mobile} email={email} img={img} lineColor={lineColor} logo={logo} href={fullURL} displayUrl={website} />);
+        setSigOutput(<AASignature name={name} title={title} mobile={mobile} email={email} img={img} lineColor={lineColor} logo={logo} href={fullURL} displayUrl={website} linkedIn={linkedIn} officePhone={officePhone} />);
         break;
 
       case 'beech':
@@ -89,7 +82,39 @@ function App() {
         break;
     }
 
-  }, [activeSig]);
+  }, [activeSig, name, title, mobile, img, lineColor, logo, fullURL, website, linkedIn, officePhone, email,]);
+
+
+
+    function htmlProcess(str) {
+        
+      var div = document.createElement('div');
+      div.innerHTML = str.trim();
+      
+      return htmlFormat(div, 0).innerHTML;
+    }
+
+    function htmlFormat(node, level) {
+      
+      var indentBefore = new Array(level++ + 1).join('  '),
+          indentAfter  = new Array(level - 1).join('  '),
+          textNode;
+      
+      for (var i = 0; i < node.children.length; i++) {
+          
+          textNode = document.createTextNode('\n' + indentBefore);
+          node.insertBefore(textNode, node.children[i]);
+          
+          htmlFormat(node.children[i], level);
+          
+          if (node.lastElementChild === node.children[i]) {
+              textNode = document.createTextNode('\n' + indentAfter);
+              node.appendChild(textNode);
+          }
+      }
+      
+      return node;
+    }
 
 
   return (
@@ -106,8 +131,7 @@ function App() {
       </div>
       </div>
      
-      <header className="App-header">
-        
+      <header className="App-header">   
         <form className='form-container'>
           <div className="inputGroup-row">
             <div className='inputGroup'>
@@ -148,51 +172,72 @@ function App() {
                 value={img} 
                 onChange={ (e) => { setImg(e.target.value) }} />
           </div>
-
-          <button onClick={ (e) => { displayToggle(e) } } >{displayMoreText}</button>
-
-          <div className="show-advanced" style={{ display: displayMoreVisibility }}>
-
-          <div className='inputGroup'>
-              <label htmlFor='officePhone'>Office Phone</label>
-              <input type='text' 
-                  name='officePhone' 
-                  value={officePhone} 
-                  onChange={ (e) => { setOfficePhone(e.target.value) }} />
-            </div>
-            <div className='inputGroup'>
-              <label htmlFor='address'>Address</label>
-              <textarea type='text' 
-                  rows="2"
-                  name='address' 
-                  value={address} 
-                  onChange={ (e) => { setAddress(e.target.value) }}>
-                    {address} 
-              </textarea>
-            </div>
-            <div className="inputGroup-row">
+          <div className={ displayMoreVisibile ? "show-advanced" : "show-advanced hidden"}>
+            <div className='inputGroup-row'>
               <div className='inputGroup'>
-                <label htmlFor='website'>Website (Display)</label>
-                <input type='text' 
-                    name='website' 
-                    value={website} 
-                    onChange={ (e) => { setWebsite(e.target.value) }} />
+                  <label htmlFor='officePhone'>Office Phone</label>
+                  <input type='text' 
+                      name='officePhone' 
+                      value={officePhone} 
+                      onChange={ (e) => { setOfficePhone(e.target.value) }} />
+                </div>
+                <div className='inputGroup'>
+                  <label htmlFor='linkedIn'>LinkedIn</label>
+                  <input type='text' 
+                      name='linkedIn' 
+                      value={linkedIn} 
+                      onChange={ (e) => { setLinkedIn(e.target.value) }} />
+                </div>
               </div>
               <div className='inputGroup'>
-                <label htmlFor='fullURL'>Full URL (the link)</label>
-                <input type='text' 
-                    name='fullURL' 
-                    value={fullURL} 
-                    onChange={ (e) => { setFullURL(e.target.value) }} />
+                <label htmlFor='address'>Address</label>
+                <textarea type='text' 
+                    rows="2"
+                    name='address' 
+                    value={address} 
+                    onChange={ (e) => { setAddress(e.target.value) }}>
+                      {address} 
+                </textarea>
               </div>
-            </div>
+              <div className="inputGroup-row">
+                <div className='inputGroup'>
+                  <label htmlFor='website'>Website (Display)</label>
+                  <input type='text' 
+                      name='website' 
+                      value={website} 
+                      onChange={ (e) => { setWebsite(e.target.value) }} />
+                </div>
+                <div className='inputGroup'>
+                  <label htmlFor='fullURL'>Full URL (the link)</label>
+                  <input type='text' 
+                      name='fullURL' 
+                      value={fullURL} 
+                      onChange={ (e) => { setFullURL(e.target.value) }} />
+                </div>
+              </div>
+              <div className='inputGroup'>
+                <label htmlFor='lineColor'>Line Colour</label>
+                <input type='color' 
+                    name='lineColor' 
+                    value={lineColor} 
+                    onChange={ (e) => { setLineColor(e.target.value) }} />
+              </div>
           </div>
+          <button onClick={ (e) => { e.preventDefault(); displayMoreVisibile ? setDisplayMoreVisibile(false) : setDisplayMoreVisibile(true); } } >{displayMoreVisibile ? 'LESS' : 'MORE'}</button>
         </form>
         <div className='sigTemplateContainer'>
           <div className='sig-container'>
             {sigOutput}
           </div>
-          <button className="align-bottom" onClick={copySignature}>Copy Signature</button>
+          <div className='dual-buttons'>
+            <button className="align-bottom" onClick={copySignature}>Copy Signature</button>
+            <button className="align-bottom show-code" onClick={ () => { codeVisible ? setCodeVisible(false) : setCodeVisible(true);  }}>Code</button>
+          </div>
+          <div className={codeVisible ? "html visible" : "html"}>
+            <pre>
+              {htmlProcess(ReactDOMServer.renderToString(sigOutput))}
+            </pre>
+          </div>
         </div>
       </header>
     </div>

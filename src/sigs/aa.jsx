@@ -1,7 +1,7 @@
 import React from 'react';
 //import logo from './beech-and-co-logo.png';
 
-const AASignature = ( { name, title, mobile, email, img = 'https://dl.dropboxusercontent.com/s/afj5ud201cokfl3/AA_Sigs_Prof%20pic%20layout_Daniel.png?raw=1', lineColor = '#ff00ff', href, displayUrl, logo = 'https://res.cloudinary.com/mon9466/image/upload/v1599185669/beech/beech-and-co-logo_ltrxih.png'} ) => {
+const AASignature = ( { name, title, mobile, officePhone = '02 9659 4411', email, img = 'https://dl.dropboxusercontent.com/s/afj5ud201cokfl3/AA_Sigs_Prof%20pic%20layout_Daniel.png?raw=1', lineColor = '#ff00ff', href, displayUrl, logo = 'https://res.cloudinary.com/mon9466/image/upload/v1599185669/beech/beech-and-co-logo_ltrxih.png', address = 'Suite 415/2-8, Brookhollow Ave, Norwest NSW 2153' } ) => {
     return (
     <table cellPadding={0} cellSpacing={0} className="sc-gPEVay eQYmiW" style={{verticalAlign: '-webkit-baseline-middle', fontSize: 'medium', fontFamily: 'Arial'}}>
         <tbody>
@@ -98,8 +98,8 @@ const AASignature = ( { name, title, mobile, email, img = 'https://dl.dropboxuse
                               </table>
                             </td>
                             <td style={{padding: '0px', color: 'rgb(0, 0, 0)'}}>
-                              <a href="tel:02 9659 4411" color="#000000" className="sc-gipzik iyhjGb" style={{textDecoration: 'none', color: 'rgb(0, 0, 0)', fontSize: '12px'}}>
-                                <span>02 9659 4411</span>
+                              <a href="tel:{officePhone}" color="#000000" className="sc-gipzik iyhjGb" style={{textDecoration: 'none', color: 'rgb(0, 0, 0)', fontSize: '12px'}}>
+                                <span>{officePhone}</span>
                               </a> | <a href={"tel:"+mobile} color="#000000" className="sc-gipzik iyhjGb" style={{textDecoration: 'none', color: 'rgb(0, 0, 0)', fontSize: '12px'}}>
                                 <span>{mobile}</span>
                               </a>
@@ -161,7 +161,7 @@ const AASignature = ( { name, title, mobile, email, img = 'https://dl.dropboxuse
                             </td>
                             <td style={{padding: '0px'}}>
                               <span color="#000000" className="sc-csuQGl CQhxV" style={{fontSize: '12px', color: 'rgb(0, 0, 0)'}}>
-                                <span>Suite 415/2-8, Brookhollow Ave, Norwest NSW 2153</span>
+                                <span>{address}</span>
                               </span>
                             </td>
                           </tr>

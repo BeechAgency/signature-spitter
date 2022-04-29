@@ -1,7 +1,7 @@
 import React from 'react';
 //import logo from './beech-and-co-logo.png';
 
-const AASignature = ( { name, title, mobile, officePhone = '02 9659 4411', email, img = 'https://dl.dropboxusercontent.com/s/afj5ud201cokfl3/AA_Sigs_Prof%20pic%20layout_Daniel.png?raw=1', lineColor = '#ff00ff', href, displayUrl, logo = 'https://res.cloudinary.com/mon9466/image/upload/v1599185669/beech/beech-and-co-logo_ltrxih.png', address = 'Suite 415/2-8, Brookhollow Ave, Norwest NSW 2153' } ) => {
+const AASignature = ( { name, title, mobile, officePhone = '02 9659 4411', email, img = 'https://dl.dropboxusercontent.com/s/afj5ud201cokfl3/AA_Sigs_Prof%20pic%20layout_Daniel.png?raw=1', lineColor = '#ff00ff', href, displayUrl, logo = 'https://res.cloudinary.com/mon9466/image/upload/v1599185669/beech/beech-and-co-logo_ltrxih.png', address = 'Suite 415/2-8, Brookhollow Ave, Norwest NSW 2153', linkedIn } ) => {
     return (
     <table cellPadding={0} cellSpacing={0} className="sc-gPEVay eQYmiW" style={{verticalAlign: '-webkit-baseline-middle', fontSize: 'medium', fontFamily: 'Arial'}}>
         <tbody>
@@ -35,7 +35,7 @@ const AASignature = ( { name, title, mobile, officePhone = '02 9659 4411', email
                                       <div />
                                     </td>
                                     <td>
-                                      <a href="https://www.linkedin.com/company/alexander-appointments/?originalSubdomain=br" color="#000000" className="sc-hzDkRC kpsoyz" style={{display: 'inline-block', padding: '0px', backgroundColor: 'rgb(0, 0, 0)'}}>
+                                      <a href={linkedIn} color="#000000" className="sc-hzDkRC kpsoyz" style={{display: 'inline-block', padding: '0px', backgroundColor: 'rgb(0, 0, 0)'}}>
                                         <img src="https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/linkedin-icon-2x.png" alt="linkedin" color="#000000" height={24} className="sc-bRBYWo ccSRck" style={{backgroundColor: 'rgb(0, 0, 0)', maxWidth: '135px', display: 'block'}} />
                                       </a>
                                     </td>

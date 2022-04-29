@@ -66,7 +66,7 @@ function App() {
 
     switch(activeSig) {
       case 'aa':
-        setSigOutput(<AASignature name={name} title={title} mobile={mobile} email={email} img={img} lineColor={lineColor} logo={logo} href={fullURL} displayUrl={website} linkedIn={linkedIn} officePhone={officePhone} />);
+        setSigOutput(<AASignature name={name} title={title} mobile={mobile} email={email} img={img} lineColor={lineColor} logo={logo} href={fullURL} displayUrl={website} linkedIn={linkedIn} address={address} officePhone={officePhone} />);
         break;
 
       case 'beech':

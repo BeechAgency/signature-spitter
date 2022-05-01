@@ -120,7 +120,7 @@ const AASignature = ( { name, title, mobile, officePhone = '02 9659 4411', email
                               </table>
                             </td>
                             <td style={{padding: '0px'}}>
-                              <a href="mailto:{email}" color="#000000" className="sc-gipzik iyhjGb" style={{textDecoration: 'none', color: 'rgb(0, 0, 0)', fontSize: '12px'}}>
+                              <a href={`mailto:${email}`} color="#000000" className="sc-gipzik iyhjGb" style={{textDecoration: 'none', color: 'rgb(0, 0, 0)', fontSize: '12px'}}>
                                 <span>{email}</span>
                               </a>
                             </td>
